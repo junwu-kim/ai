@@ -1,0 +1,11 @@
+{
+    "terminal.integrated.env.windows": {
+        "PATH": "C:\\Users\\User\\.lupastudio\\venv\\Scripts;${env:PATH}"
+    },
+    "lupastudio.appOffset": "0x201b9000",
+    "lupastudio.lupaExecutable": "${config:lupastudio.sdkroot}/${config:lupastudio.activeSdk}/out/${config:lupastudio.activeTarget}/DQC-SYS_FW.elf",
+    "lupastudio.gdbPath": "C:\\Users\\User\\.lupastudio\\packages\\toolchain-gccarmnoneeabi\\bin\\arm-none-eabi-gdb.exe",
+    "lupastudio.toolchainPath": "C:\\Users\\User\\.lupastudio\\packages\\toolchain-gccarmnoneeabi",
+    "lupastudio.sdkroot": "C:\\Users\\User\\.lupastudio\\sdk",
+    "cortex-debug.openocdPath": "C:\\Users\\User\\.lupastudio\\sdk\\${config:lupastudio.activeSdk}\\sdk\\openocd\\bin\\openocd_mpu.exe"
+}
