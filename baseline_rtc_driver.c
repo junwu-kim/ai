@@ -9,27 +9,31 @@ int main(void) {
     while (!(RCC_GetFlagStatus(RCC_LSERDY))) {}
 
     // Initialize the RTC
-    RTC_InitTypeDef RTC_InitStruct;
-    RTC_InitStruct.Asynchronous = FALSE;
-    RTC_InitStruct.ClockSource = RTC_CLOCKSOURCE_LSE;
-    RTC_Init(&RTC_InitStruct);
+    RTC_InitTypeDef rtcInit;
+    rtcInit.Asynchronous = FALSE;
+    rtcInit.ClockSource = RTC_CLOCKSOURCE_LSE;
+    RTC_Init(&rtcInit);
 
-    // Set the RTC to use the LSE clock as its source
-    RTC_SetClockSource(RTC_CLOCKSOURCE_LSE);
+    // Set the RTC date and time
+    RTC_SetTime(0x00, 0x01, 0x02, 0x03, 0x04); // year, month, day, hour, minute
 
-    // Set the RTC to generate an interrupt every second
-    RTC_SetAlarm(RTC_ALARM_A, 1000); // 1 second
-
-    // Enable the RTC alarm interrupt
+    // Enable the RTC interrupt
     NVIC_EnableIRQ(RTC_IRQn);
     NVIC_SetPriority(RTC_IRQn, 5);
 
+    // Set the RTC interrupt to occur every second
+    RTC_SetAlarm(1, 0); // alarm at 00:00:01
+
     while (1) {
-        // Wait for the RTC alarm interrupt to occur
+        // Wait for the RTC interrupt
         __WFI();
     }
 }
 
 void RTC_IRQHandler(void) {
-    // Handle the RTC alarm interrupt here
+    // Clear the RTC interrupt flag
+    RTC_ClearIT(RTC_IT_ALARMA);
+
+    // Handle the RTC interrupt here
+    // For example, you can toggle an LED or send a message
 }
